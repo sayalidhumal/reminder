@@ -63,6 +63,13 @@
 				<version>3.0.3</version>
 				<configuration>
 					<appName>our-reminder</appName>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.reminder.app.ReminderScheduler</mainClass>
+						</manifest>
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
