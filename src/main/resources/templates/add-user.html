@@ -1,6 +1,6 @@
 <form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
     <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="Name">
+    <input type="text" th:field="*{firstName}" id="name" placeholder="Name">
     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
     <label for="email">Email</label>
     <input type="text" th:field="*{email}" id="email" placeholder="Email">

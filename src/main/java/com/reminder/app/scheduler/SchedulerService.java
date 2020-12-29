@@ -1,4 +1,4 @@
-package com.reminder.scheduler;
+package com.reminder.app.scheduler;
 
 public class SchedulerService {
 

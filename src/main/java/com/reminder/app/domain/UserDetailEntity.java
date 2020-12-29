@@ -1,24 +1,26 @@
-package com.reminder.domain;
-
-import java.io.Serializable;
+package com.reminder.app.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "USER_DETAIL")
+@Data
 @Builder
-public class UserDetail implements Serializable {
-
-	private static final long serialVersionUID = -451088116994619500L;
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDetailEntity  {
 
 	@Column(name = "EMAIL")
-	private String email;
+	public String email;
 
 	@Column(name = "FIRST_NAME")
-	private String firstName;
+	public String firstName;
 
 	@Column(name = "LAST_NAME")
 	private String lastName;
