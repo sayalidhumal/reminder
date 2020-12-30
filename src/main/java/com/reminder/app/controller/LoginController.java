@@ -24,14 +24,14 @@ public class LoginController {
 
 	@GetMapping("/signup")
 	public String showSignUpForm() {
-		return "add-user";
+		return "welcome/add-user";
 	}
 
 	@PostMapping("/adduser")
 	public String addUser(User user, BindingResult result,
 	        Model model) {
 		if (result.hasErrors()) {
-			return "add-user";
+			return "welcome/add-user";
 		}
 
 		userService.addUser(user);
@@ -40,7 +40,7 @@ public class LoginController {
 
 	@GetMapping("/login")
 	public String showloginForm() {
-		return "login";
+		return "welcome/login";
 	}
 
 	@PostMapping("/login")
@@ -48,16 +48,16 @@ public class LoginController {
 	        @ModelAttribute(value = "password") String password, Model model) {
 		try {
 			loginService.processLogin(userName, password);
-			return "main";
+			return "user/main";
 		} catch (DomainException e) {
 			model.addAttribute("errorMessage", e.getViewMessage());
-			return "login";
+			return "welcome/login";
 		}
 
 	}
 
 	@GetMapping("/")
 	public String main() {
-		return "welcome";
+		return "welcome/welcome";
 	}
 }
