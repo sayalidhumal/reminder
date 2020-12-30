@@ -14,16 +14,17 @@ import com.reminder.app.model.type.ResponseCodeType;
 import com.reminder.app.repository.UserDetailRepository;
 
 @Repository
-public class UserDaoService
-        implements UserDaoServiceInterface {
+public class UserDaoService implements UserDaoServiceInterface {
 
 	@Autowired
 	UserDetailRepository userDetailRepository;
 
+	@Override
 	public void addUser(UserDetailEntity user) {
 		userDetailRepository.save(user);
 	}
 
+	@Override
 	public User getUserbyUserName(String userName) {
 		Optional<UserDetailEntity> optionalUserDetailEntity = userDetailRepository
 		        .findById(userName);
@@ -34,13 +35,23 @@ public class UserDaoService
 		return map(userDetailEntity);
 	}
 
+	@Override
+	public Optional<UserDetailEntity> getOptionalUserByUserName(String userName) {
+		return userDetailRepository.findById(userName);
+	}
+
+	@Override
+	public List<UserDetailEntity> getUsersByEmail(String email) {
+		return userDetailRepository.findByEmail(email);
+	}
+
 	private User map(UserDetailEntity userDetailEntity) {
 		return User.builder()
 		        .firstName(userDetailEntity.getFirstName())
 		        .email(userDetailEntity.getEmail())
 		        .lastName(userDetailEntity.getLastName())
 		        .password(userDetailEntity.getPassword())
-		        .userName(userDetailEntity.getUserName())
+		        .username(userDetailEntity.getUserName())
 		        .build();
 	}
 

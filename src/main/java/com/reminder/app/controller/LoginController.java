@@ -3,7 +3,6 @@ package com.reminder.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,19 +22,20 @@ public class LoginController {
 	LoginService loginService;
 
 	@GetMapping("/signup")
-	public String showSignUpForm() {
-		return "welcome/add-user";
+	public String showSignUpForm(Model model) {
+		model.addAttribute("user", User.builder().build());
+		return "welcome/signup";
 	}
 
-	@PostMapping("/adduser")
-	public String addUser(User user, BindingResult result,
-	        Model model) {
-		if (result.hasErrors()) {
-			return "welcome/add-user";
+	@PostMapping("/signup")
+	public String processSignup(@ModelAttribute(value = "user") User user, Model model) {
+		try {
+			userService.addUser(user);
+			return "redirect:/login";
+		} catch (DomainException e) {
+			model.addAttribute("errorMessage", e.getViewMessage());
+			return "welcome/signup";
 		}
-
-		userService.addUser(user);
-		return "redirect:/index";
 	}
 
 	@GetMapping("/login")
