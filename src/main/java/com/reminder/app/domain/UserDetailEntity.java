@@ -31,4 +31,7 @@ public class UserDetailEntity  {
 
 	@Column(name = "PASSWORD")
 	private String password;
+	
+	@Column(name = "ROLE")
+	private String role;
 }

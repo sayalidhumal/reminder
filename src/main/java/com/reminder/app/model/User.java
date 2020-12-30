@@ -1,5 +1,7 @@
 package com.reminder.app.model;
 
+import com.reminder.app.model.type.RoleType;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +17,7 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
+
+	@Builder.Default
+	private RoleType role = RoleType.USER;
 }

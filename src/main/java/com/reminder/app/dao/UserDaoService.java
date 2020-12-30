@@ -11,6 +11,7 @@ import com.reminder.app.domain.UserDetailEntity;
 import com.reminder.app.exception.DomainException;
 import com.reminder.app.model.User;
 import com.reminder.app.model.type.ResponseCodeType;
+import com.reminder.app.model.type.RoleType;
 import com.reminder.app.repository.UserDetailRepository;
 
 @Repository
@@ -46,12 +47,14 @@ public class UserDaoService implements UserDaoServiceInterface {
 	}
 
 	private User map(UserDetailEntity userDetailEntity) {
+		Optional<RoleType> roleType = RoleType.byName(userDetailEntity.getRole());
 		return User.builder()
 		        .firstName(userDetailEntity.getFirstName())
 		        .email(userDetailEntity.getEmail())
 		        .lastName(userDetailEntity.getLastName())
 		        .password(userDetailEntity.getPassword())
 		        .username(userDetailEntity.getUserName())
+		        .role(roleType.orElse(RoleType.USER))
 		        .build();
 	}
 
