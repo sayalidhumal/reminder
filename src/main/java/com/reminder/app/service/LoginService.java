@@ -20,11 +20,13 @@ public class LoginService implements LoginServiceInterface {
 	public void processLogin(String userName, String password) {
 		User user = userService.getUserByUserName(userName);
 
-		if (user.getPassword().equalsIgnoreCase(password))
+		if (user.getPassword().equalsIgnoreCase(password)) {
 			return;
+		}
 
 		log.info("Login failed for userName: {}. Invalid username/password", userName);
-		throw new DomainException(ResponseCodeType.LOGIN_FAILED,ViewMessage.INVALID_CREDENTIALS);
+		throw new DomainException(ResponseCodeType.LOGIN_FAILED,
+		        ViewMessage.INVALID_CREDENTIALS);
 	}
 
 }

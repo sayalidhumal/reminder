@@ -55,6 +55,7 @@ public class UserService implements UserServiceInterface {
 		        .email(user.getEmail())
 		        .password(user.getPassword())
 		        .userName(user.getUsername())
+		        .role(user.getRole().getName())
 		        .build();
 	}
 
