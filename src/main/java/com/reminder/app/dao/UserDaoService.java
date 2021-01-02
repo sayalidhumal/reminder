@@ -1,7 +1,10 @@
 package com.reminder.app.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,6 +26,17 @@ public class UserDaoService implements UserDaoServiceInterface {
 	@Override
 	public void addUser(UserDetailEntity user) {
 		userDetailRepository.save(user);
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		Iterable<UserDetailEntity> userDetails = userDetailRepository.findAll();
+		List<UserDetailEntity> userList = new ArrayList<>();
+		userDetails.forEach(userList::add);
+		
+		return userList.stream()
+		        .map(this::map)
+		        .collect(Collectors.toList());
 	}
 
 	@Override

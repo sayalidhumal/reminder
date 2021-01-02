@@ -11,6 +11,8 @@ public interface UserDaoServiceInterface {
 
 	public User getUserbyUserName(String userName);
 
+	public List<User> getAllUsers();
+
 	public Optional<UserDetailEntity> getOptionalUserByUserName(String userName);
 
 	public List<UserDetailEntity> getUsersByEmail(String email);

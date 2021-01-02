@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html th:fragment="html-tag">
+<head th:replace="layouts/fragments :: reminder-header" />
+<body>
+	<nav th:replace="layouts/fragments :: navigation-bar" />
+	<div sec:authorize="isAuthenticated()">
+		<div class="container" sec:authorize="hasAuthority('ADMIN')">
+			<div th:each="user: ${users}">
+				<div class="row">
+					<div class="col-4 table-row" th:each="field: ${user}"><p th:text="${user.firstName}"></p></div>
+					<div class="col-4 table-row" th:each="field: ${user}"><p th:text="${user.lastName}"></p></div>
+					<div class="col-4 table-row" th:each="field: ${user}"><p th:text="${user.username}"></p></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

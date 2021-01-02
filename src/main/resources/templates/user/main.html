@@ -2,9 +2,9 @@
 <html th:fragment="html-tag">
 <head th:replace="layouts/fragments :: reminder-header" />
 <body>
-	<div th:replace="layouts/fragments :: navigation-bar" />
+	<nav th:replace="layouts/fragments :: navigation-bar" />
 	<div sec:authorize="isAuthenticated()">
-		<h1 class="myh">Welcom user</h1>
+		<h1>Welcome user</h1>
 		<div sec:authorize="hasAuthority('USER')">Text visible to user.</div>
 		<div sec:authorize="hasAuthority('ADMIN')">Text visible to
 			admin.</div>

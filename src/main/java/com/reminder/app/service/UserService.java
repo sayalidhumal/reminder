@@ -2,6 +2,7 @@ package com.reminder.app.service;
 
 import static com.reminder.app.util.CodeUtil.hasElemets;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class UserService implements UserServiceInterface {
 		}
 
 		userDaoService.addUser(map(user));
+	}
+	
+	@Override
+	public List<User> getAllUsers() {
+		return userDaoService.getAllUsers();
 	}
 
 	@Override

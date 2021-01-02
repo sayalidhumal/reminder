@@ -39,6 +39,6 @@ body {
   color: white;
 }
 
-.myh {
-	color: red;
+.table-row{
+	border: 1px solid black;
 }
