@@ -5,12 +5,12 @@
 	<div class="container-fluid text-center">
 
 		<h1>Login page</h1>
-
-		<form th:action="@{/login}" method="post"
+		<div class="border border-secondary p-3 rounded"
 			style="max-width: 350px; margin: 0 auto;">
+			<form th:action="@{/login}" method="post">
 
-			<div class="border border-secondary p-3 rounded">
 				<div th:replace="layouts/fragments :: error-message" />
+
 				<p>
 					<input type="text" class="form-control" id="userName"
 						name="username" placeholder="Username" autofocus="autofocus" />
@@ -22,8 +22,13 @@
 				</p>
 
 				<input type="submit" value="Login" class="btn btn-primary" />
+
+			</form>
+			<br>
+			<div>
+				<a href="/signup" class="btn btn-primary">Signup</a>
 			</div>
-		</form>
+		</div>
 	</div>
 </body>
 </html>

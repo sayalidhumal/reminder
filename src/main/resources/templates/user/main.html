@@ -1,1 +1,2 @@
-<p>Main page</p>
+<div sec:authorize="hasRole('User')">Text visible to user.</div>
+<div sec:authorize="hasRole('Admin')">Text visible to admin.</div>

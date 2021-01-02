@@ -58,6 +58,6 @@ public class LoginController {
 
 	@GetMapping("/")
 	public String main() {
-		return "welcome/welcome";
+		return "redirect:/login";
 	}
 }
