@@ -1,39 +1,44 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layouts/fragments :: welcome-header" />
+<html th:fragment="html-tag">
+<head th:replace="layouts/fragments :: reminder-header" />
 <body>
 	<div class="container-fluid text-center">
 
-		<h1>Login page</h1>
+		<h1>Signup</h1>
 		<form th:action="@{/signup}" th:object="${user}" method="post"
 			style="max-width: 350px; margin: 0 auto;">
 			<div class="border border-secondary p-3 rounded">
 				<div th:replace="layouts/fragments :: error-message" />
 				<p>
 					<input class="form-control" type="text" th:field="*{firstName}"
-						id="firstName" placeholder="First Name" autofocus="autofocus" th:required="required">
+						id="firstName" placeholder="First Name" autofocus="autofocus"
+						th:required="required">
 				</p>
 
 				<p>
 					<input class="form-control" type="text" th:field="*{lastName}"
-						id="lastName" placeholder="Last Name" autofocus="autofocus" th:required="required">
+						id="lastName" placeholder="Last Name" autofocus="autofocus"
+						th:required="required">
 				</p>
 
 				<p>
 					<input class="form-control" type="text" th:field="*{email}"
-						id="email" placeholder="Email" autofocus="autofocus" th:required="required">
+						id="email" placeholder="Email" autofocus="autofocus"
+						th:required="required">
 				</p>
-				
+
 				<p>
 					<input class="form-control" type="text" th:field="*{username}"
-						id="username" placeholder="Username" autofocus="autofocus" th:required="required">
+						id="username" placeholder="Username" autofocus="autofocus"
+						th:required="required">
 				</p>
-				
+
 				<p>
 					<input class="form-control" type="password" th:field="*{password}"
-						id="password" placeholder="Password" autofocus="autofocus" th:required="required">
+						id="password" placeholder="Password" autofocus="autofocus"
+						th:required="required">
 				</p>
-				
+
 				<input type="submit" value="Signup">
 			</div>
 		</form>

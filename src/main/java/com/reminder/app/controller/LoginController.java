@@ -12,6 +12,9 @@ import com.reminder.app.model.User;
 import com.reminder.app.service.LoginService;
 import com.reminder.app.service.UserService;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Controller
 public class LoginController {
 
@@ -21,13 +24,13 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 
-	@GetMapping("/signup")
+	@GetMapping(path = "/signup")
 	public String showSignUpForm(Model model) {
 		model.addAttribute("user", User.builder().build());
 		return "welcome/signup";
 	}
 
-	@PostMapping("/signup")
+	@PostMapping(path = "/signup")
 	public String processSignup(@ModelAttribute(value = "user") User user, Model model) {
 		try {
 			userService.addUser(user);
@@ -38,15 +41,16 @@ public class LoginController {
 		}
 	}
 
-	@GetMapping("/login")
+	@GetMapping(path = "/login")
 	public String showloginForm() {
 		return "welcome/login";
 	}
 
-	@PostMapping("/login")
+	@PostMapping(path = "/login")
 	public String processLogin(@ModelAttribute(value = "username") String userName,
 	        @ModelAttribute(value = "password") String password, Model model) {
 		try {
+			log.info("authenticating user: {}",userName);
 			loginService.processLogin(userName, password);
 			return "user/main";
 		} catch (DomainException e) {
@@ -56,7 +60,7 @@ public class LoginController {
 
 	}
 
-	@GetMapping("/")
+	@GetMapping(path = "/")
 	public String main() {
 		return "redirect:/login";
 	}
