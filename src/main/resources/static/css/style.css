@@ -40,5 +40,14 @@ body {
 }
 
 .table-row{
-	border: 1px solid black;
+	border: 1px solid grey;
+}
+
+.danger{
+	background-color: red
+}
+
+.button-group {
+	padding: 20px;
+	text-align: center;
 }

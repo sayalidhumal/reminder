@@ -3,13 +3,33 @@
 <head th:replace="layouts/fragments :: reminder-header" />
 <body>
 	<nav th:replace="layouts/fragments :: navigation-bar" />
-	<div sec:authorize="isAuthenticated()">
-		<div class="container" sec:authorize="hasAuthority('ADMIN')">
+	<div class="container" sec:authorize="isAuthenticated()">
+		<div class=" my-3" style="max-width: 350px;">
+			<form th:action="@{/searchUser}" method="get">
+				<p>
+					<input type="text" class="form-control" id="searchText"
+						placeholder="search" name="searchText" autofocus="autofocus" />
+				</p>
+				<input type="submit" value="Search" class="btn btn-primary" />
+			</form>
+		</div>
+		<div sec:authorize="hasAuthority('ADMIN')">
 			<div th:each="user: ${users}">
 				<div class="row">
-					<div class="col-4 table-row" th:each="field: ${user}"><p th:text="${user.firstName}"></p></div>
-					<div class="col-4 table-row" th:each="field: ${user}"><p th:text="${user.lastName}"></p></div>
-					<div class="col-4 table-row" th:each="field: ${user}"><p th:text="${user.username}"></p></div>
+					<div class="col-md-4 table-row d-flex" th:each="field: ${user}">
+						<p class="justify-content-center align-self-center mx-auto mb-0"
+							th:text="${user.firstName + ' ' + user.lastName}"></p>
+					</div>
+					<div class="col-md-4 table-row text-center d-flex"
+						th:each="field: ${user}">
+						<p class="justify-content-center align-self-center mx-auto mb-0"
+							th:text="${user.email}"></p>
+					</div>
+					<div class="col-md-4 table-row button-group"
+						th:each="field: ${user}">
+						<a class="btn btn-primary ">View</a> <a class="btn btn-primary">Edit</a>
+						<a class="btn btn-primary danger">Delete</a>
+					</div>
 				</div>
 			</div>
 		</div>
