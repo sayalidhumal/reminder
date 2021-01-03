@@ -9,3 +9,5 @@ Project setup:
       
   * Eclipse setup:
       * Install <b>JavaScript Development Tools</b> in eclipse.
+      * Added below plugins
+          * HTML Editor
