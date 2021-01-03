@@ -48,6 +48,11 @@ public class UserService implements UserServiceInterface {
 	public List<User> getAllUsers() {
 		return userDaoService.getAllUsers();
 	}
+	
+	@Override
+	public List<User> getAllUsersByKeyword(String searchText) {
+		return userDaoService.getAllUsersByKeyword(searchText);
+	}
 
 	@Override
 	public User getUserByUserName(String userName) {

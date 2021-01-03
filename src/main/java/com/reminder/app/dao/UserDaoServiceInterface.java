@@ -13,6 +13,8 @@ public interface UserDaoServiceInterface {
 
 	public List<User> getAllUsers();
 
+	public List<User> getAllUsersByKeyword(String searchText);
+
 	public Optional<UserDetailEntity> getOptionalUserByUserName(String userName);
 
 	public List<UserDetailEntity> getUsersByEmail(String email);

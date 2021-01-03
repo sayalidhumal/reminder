@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.reminder.app.model.User;
 import com.reminder.app.repository.UserDetailRepository;
@@ -34,6 +35,20 @@ public class UserController {
 		List<User> users = new ArrayList<>();
 		try {
 			users = userService.getAllUsers();
+		} catch (Exception e) {
+			log.info("Exception occured while getting all users: {}", e.getMessage(), e);
+
+		}
+		model.addAttribute("users", users);
+		return "user/viewUsers";
+	}
+
+	@GetMapping(path = "/search-users")
+	public String searchUsers(@ModelAttribute(value = "searchText") String searchText,
+	        Model model) {
+		List<User> users = new ArrayList<>();
+		try {
+			users = userService.getAllUsersByKeyword(searchText);
 		} catch (Exception e) {
 			log.info("Exception occured while getting all users: {}", e.getMessage(), e);
 

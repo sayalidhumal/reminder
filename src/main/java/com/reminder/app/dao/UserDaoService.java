@@ -31,12 +31,13 @@ public class UserDaoService implements UserDaoServiceInterface {
 	@Override
 	public List<User> getAllUsers() {
 		Iterable<UserDetailEntity> userDetails = userDetailRepository.findAll();
-		List<UserDetailEntity> userList = new ArrayList<>();
-		userDetails.forEach(userList::add);
-		
-		return userList.stream()
-		        .map(this::map)
-		        .collect(Collectors.toList());
+		return convert(userDetails);
+	}
+
+	@Override
+	public List<User> getAllUsersByKeyword(String searchText) {
+		Iterable<UserDetailEntity> userDetails = userDetailRepository.findAllUsersByKeyword(searchText);
+		return convert(userDetails);
 	}
 
 	@Override
@@ -58,6 +59,15 @@ public class UserDaoService implements UserDaoServiceInterface {
 	@Override
 	public List<UserDetailEntity> getUsersByEmail(String email) {
 		return userDetailRepository.findByEmail(email);
+	}
+
+	private List<User> convert(Iterable<UserDetailEntity> userDetails) {
+		List<UserDetailEntity> userList = new ArrayList<>();
+		userDetails.forEach(userList::add);
+
+		return userList.stream()
+		        .map(this::map)
+		        .collect(Collectors.toList());
 	}
 
 	private User map(UserDetailEntity userDetailEntity) {

@@ -8,6 +8,8 @@ public interface UserServiceInterface {
 	public void addUser(User user);
 
 	public List<User> getAllUsers();
+	
+	public List<User> getAllUsersByKeyword(String searchText);
 
 	public User getUserByUserName(String userName);
 }

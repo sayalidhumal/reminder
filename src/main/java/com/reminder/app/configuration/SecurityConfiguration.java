@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		        .csrf().disable()
 		        .authorizeRequests()
 		        .antMatchers("/*").permitAll()
-		        .antMatchers( "/favicon.ico").permitAll()
+		        .antMatchers("/favicon.ico").permitAll()
 		        .anyRequest().authenticated()
 		        .and()
 		        .formLogin()
@@ -46,6 +46,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/css/**");
+		web
+		        .ignoring()
+		        .antMatchers("/css/**")
+		        .antMatchers("/js/**");
 	}
 }

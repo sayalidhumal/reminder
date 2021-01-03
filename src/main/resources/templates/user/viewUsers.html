@@ -4,15 +4,14 @@
 <body>
 	<nav th:replace="layouts/fragments :: navigation-bar" />
 	<div class="container" sec:authorize="isAuthenticated()">
-		<div class=" my-3" style="max-width: 350px;">
-			<form th:action="@{/searchUser}" method="get">
-				<p>
-					<input type="text" class="form-control" id="searchText"
-						placeholder="search" name="searchText" autofocus="autofocus" />
-				</p>
-				<input type="submit" value="Search" class="btn btn-primary" />
-			</form>
-		</div>
+		<form th:action="@{/search-users}" method="get">
+			<div class=" my-3" style="max-width: 350px;">
+				<p>Filter:</p>
+				<input type="text" id="searchText" placeholder="search"
+					name="searchText" autofocus="autofocus" /> <input type="submit"
+					value="Search" class="btn btn-primary" />
+			</div>
+		</form>
 		<div sec:authorize="hasAuthority('ADMIN')">
 			<div th:each="user: ${users}">
 				<div class="row">
@@ -27,7 +26,7 @@
 					</div>
 					<div class="col-md-4 table-row button-group"
 						th:each="field: ${user}">
-						<a class="btn btn-primary ">View</a> <a class="btn btn-primary">Edit</a>
+						<a class="btn btn-primary">View</a> <a class="btn btn-primary">Edit</a>
 						<a class="btn btn-primary danger">Delete</a>
 					</div>
 				</div>
