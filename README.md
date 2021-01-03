@@ -11,3 +11,5 @@ Project setup:
       * Install <b>JavaScript Development Tools</b> in eclipse.
       * Added below plugins
           * HTML Editor
+          * SonarLint
+          * Spring Tools
