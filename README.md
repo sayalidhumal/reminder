@@ -5,4 +5,7 @@ Project setup:
       * Eclipse
       * Postgres (with pgAdmin4 for windows only)
       * SourceTree
-      * Heroku
+      * Heroku cli - https://devcenter.heroku.com/articles/heroku-cli
+      
+  * Eclipse setup:
+      * Install <b>JavaScript Development Tools</b> in eclipse.
