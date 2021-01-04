@@ -30,13 +30,19 @@
 	<!-- ------------------------------------------------------------- -->
 	<!--              Navigation Bar Fragment                          -->
 	<!-- ------------------------------------------------------------- -->
-	<nav th:fragment="navigation-bar" class="navbar navbar-dark bg-dark">
+	<nav th:fragment="navigation-bar" class="navbar navbar-dark">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExample01" aria-controls="navbarsExample01"
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<a class="navbar-brand" href="#">Logout</a>
+		<img alt="logo" style="width: 300px;" src="../../image/logo.jpg">
+		<a class="navbar-brand"
+			href="javascript: document.logoutForm.submit()">Logout</a>
+		<form name="logoutForm" th:action="@{/logout}" method="post"
+			th:hidden=true>
+			<input hidden type="submit" value="Logout" />
+		</form>
 		<div class="collapse navbar-collapse" id="navbarsExample01">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link" href="/main">Home

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http
-		        .csrf().disable()
 		        .authorizeRequests()
 		        .antMatchers("/*").permitAll()
 		        .antMatchers("/favicon.ico").permitAll()
@@ -36,7 +36,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		        .formLogin()
 		        .loginPage("/login")
 		        .defaultSuccessUrl("/main")
-		        .failureUrl("/login");
+		        .failureUrl("/login")
+		        .and()
+		        .logout()
+		        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+		        .logoutSuccessUrl("/login")
+		        .deleteCookies("JSESSIONID")
+		        .invalidateHttpSession(true);
 	}
 
 	@Bean
@@ -49,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		web
 		        .ignoring()
 		        .antMatchers("/css/**")
-		        .antMatchers("/js/**");
+		        .antMatchers("/js/**")
+		        .antMatchers("/image/**");
 	}
 }

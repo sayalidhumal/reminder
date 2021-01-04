@@ -6,10 +6,9 @@
 	<div class="container" sec:authorize="isAuthenticated()">
 		<form th:action="@{/search-users}" method="get">
 			<div class=" my-3" style="max-width: 350px;">
-				<p>Filter:</p>
 				<input type="text" id="searchText" placeholder="search"
 					name="searchText" autofocus="autofocus" /> <input type="submit"
-					value="Search" class="btn btn-primary" />
+					value="Search" class="btn btn-primary button" />
 			</div>
 		</form>
 		<div sec:authorize="hasAuthority('ADMIN')">
@@ -26,7 +25,7 @@
 					</div>
 					<div class="col-md-4 table-row button-group"
 						th:each="field: ${user}">
-						<a class="btn btn-primary">View</a> <a class="btn btn-primary">Edit</a>
+						<a class="btn btn-primary button">View</a> <a class="btn btn-primary button">Edit</a>
 						<a class="btn btn-primary danger">Delete</a>
 					</div>
 				</div>
