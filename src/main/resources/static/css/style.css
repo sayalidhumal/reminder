@@ -1,11 +1,12 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	color: #AD8174;
-	 background-image: url(../image/background.jpg);
+	background-color: black;
 }
 
 .table-row {
-	border: 1px solid grey;
+	border: 1px solid #686b70;
+	text-align: center;
 }
 
 .danger {
@@ -20,4 +21,13 @@ body {
 
 .button {
 	background-color: #689775;
+}
+
+.th-row {
+	background-color: #343a40;
+	color: white;
+}
+
+div {
+	margin-bottom: 20px;
 }

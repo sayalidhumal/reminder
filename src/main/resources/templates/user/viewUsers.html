@@ -4,7 +4,8 @@
 <body>
 	<nav th:replace="layouts/fragments :: navigation-bar" />
 	<div class="container" sec:authorize="isAuthenticated()">
-		<form th:action="@{/search-users}" method="get">
+		<div th:replace="layouts/fragments :: error-message" />
+		<form th:action="@{/main/search-users}" method="get">
 			<div class=" my-3" style="max-width: 350px;">
 				<input type="text" id="searchText" placeholder="search"
 					name="searchText" autofocus="autofocus" /> <input type="submit"
@@ -12,24 +13,37 @@
 			</div>
 		</form>
 		<div sec:authorize="hasAuthority('ADMIN')">
-			<div th:each="user: ${users}">
-				<div class="row">
-					<div class="col-md-4 table-row d-flex" th:each="field: ${user}">
-						<p class="justify-content-center align-self-center mx-auto mb-0"
-							th:text="${user.firstName + ' ' + user.lastName}"></p>
-					</div>
-					<div class="col-md-4 table-row text-center d-flex"
-						th:each="field: ${user}">
-						<p class="justify-content-center align-self-center mx-auto mb-0"
-							th:text="${user.email}"></p>
-					</div>
-					<div class="col-md-4 table-row button-group"
-						th:each="field: ${user}">
-						<a class="btn btn-primary button">View</a> <a class="btn btn-primary button">Edit</a>
-						<a class="btn btn-primary danger">Delete</a>
-					</div>
-				</div>
+			<div>
+				<a style="max-width: 200px;" href="/main/add-user"
+					class=" form-control btn btn-primary button">Add User</a>&nbsp;
 			</div>
+			<table border="1" cellpadding="10">
+				<thead>
+					<tr>
+						<th class="table-row th-row">Name</th>
+						<th class="table-row th-row">Email</th>
+						<th class="table-row th-row">Role</th>
+						<th class="table-row th-row">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user: ${users}">
+						<td class="table-row"
+							th:text="${user.firstName + ' ' + user.lastName}">Name</td>
+						<td class="table-row" th:text="${user.email}">Email</td>
+						<td class="table-row" th:text="${user.role.name}">Role</td>
+						<td class="table-row">
+							<a class="btn btn-primary button"
+								href="/login">View</a>&nbsp; 
+							<a class="btn btn-primary button"
+								href="#"
+								th:href="@{/main/edit-user/{username}(username=${user.username})}">Edit</a>&nbsp;
+							<a class="btn btn-primary danger" href="#"
+								th:href="@{/main/delete-user/{username}(username=${user.username})}">Delete</a>
+							</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>

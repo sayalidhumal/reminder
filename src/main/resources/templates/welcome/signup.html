@@ -3,7 +3,6 @@
 <head th:replace="layouts/fragments :: reminder-header" />
 <body>
 	<div class="container-fluid text-center">
-
 		<h1>Signup</h1>
 		<form th:action="@{/signup}" th:object="${user}" method="post"
 			style="max-width: 350px; margin: 0 auto;">
@@ -39,7 +38,7 @@
 						th:required="required">
 				</p>
 
-				<input type="submit" value="Signup">
+				<input class=" form-control btn btn-primary button" type="submit" value="Signup">
 			</div>
 		</form>
 	</div>

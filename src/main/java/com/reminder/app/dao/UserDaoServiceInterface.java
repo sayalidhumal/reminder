@@ -18,4 +18,6 @@ public interface UserDaoServiceInterface {
 	public Optional<UserDetailEntity> getOptionalUserByUserName(String userName);
 
 	public List<UserDetailEntity> getUsersByEmail(String email);
+	
+	public void deleteUser(String username);
 }

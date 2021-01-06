@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import com.reminder.app.model.type.RoleType;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -22,7 +24,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(loginService);
-
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		        .authorizeRequests()
 		        .antMatchers("/*").permitAll()
 		        .antMatchers("/favicon.ico").permitAll()
+		        .antMatchers("/add-user").access(RoleType.ADMIN.getName())
 		        .anyRequest().authenticated()
 		        .and()
 		        .formLogin()
@@ -56,6 +58,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		        .ignoring()
 		        .antMatchers("/css/**")
 		        .antMatchers("/js/**")
-		        .antMatchers("/image/**");
+		        .antMatchers("/image/**")
+		        .antMatchers("/main/css/**")
+		        .antMatchers("/main/js/**")
+		        .antMatchers("/main/image/**");
 	}
 }

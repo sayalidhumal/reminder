@@ -25,7 +25,7 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	public void addUser(User user) {
-		
+
 		Optional<UserDetailEntity> existingUser = userDaoService
 		        .getOptionalUserByUserName(user.getUsername());
 
@@ -43,12 +43,22 @@ public class UserService implements UserServiceInterface {
 
 		userDaoService.addUser(map(user));
 	}
+
+	@Override
+	public void updateUser(User user) {
+		userDaoService.addUser(map(user));
+	}
 	
+	@Override
+	public void deleteUser(String username) {
+		userDaoService.deleteUser(username);
+	}
+
 	@Override
 	public List<User> getAllUsers() {
 		return userDaoService.getAllUsers();
 	}
-	
+
 	@Override
 	public List<User> getAllUsersByKeyword(String searchText) {
 		return userDaoService.getAllUsersByKeyword(searchText);

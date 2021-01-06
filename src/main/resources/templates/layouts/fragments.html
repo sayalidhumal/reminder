@@ -23,20 +23,19 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
 </head>
 <body>
 	<!-- ------------------------------------------------------------- -->
 	<!--              Navigation Bar Fragment                          -->
 	<!-- ------------------------------------------------------------- -->
-	<nav th:fragment="navigation-bar" class="navbar navbar-dark">
+	<nav th:fragment="navigation-bar" class="navbar navbar-dark bg-dark">
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExample01" aria-controls="navbarsExample01"
 			aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<img alt="logo" style="width: 300px;" src="../../image/logo.jpg">
 		<a class="navbar-brand"
 			href="javascript: document.logoutForm.submit()">Logout</a>
 		<form name="logoutForm" th:action="@{/logout}" method="post"
@@ -52,7 +51,7 @@
 				<li><a class="nav-item" href="#">View Reminders</a></li>
 				<li><a class="nav-item" href="#">Profile</a></li>
 				<li><a sec:authorize="hasAuthority('ADMIN')" class="nav-item"
-					href="/view-users">View Users</a></li>
+					href="main/view-users">View Users</a></li>
 			</ul>
 		</div>
 	</nav>

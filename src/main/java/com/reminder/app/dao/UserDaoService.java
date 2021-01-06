@@ -3,7 +3,6 @@ package com.reminder.app.dao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,11 @@ public class UserDaoService implements UserDaoServiceInterface {
 	}
 
 	@Override
+	public void deleteUser(String username) {
+		userDetailRepository.deleteById(username);
+	}
+
+	@Override
 	public List<User> getAllUsers() {
 		Iterable<UserDetailEntity> userDetails = userDetailRepository.findAll();
 		return convert(userDetails);
@@ -36,7 +40,8 @@ public class UserDaoService implements UserDaoServiceInterface {
 
 	@Override
 	public List<User> getAllUsersByKeyword(String searchText) {
-		Iterable<UserDetailEntity> userDetails = userDetailRepository.findAllUsersByKeyword(searchText);
+		Iterable<UserDetailEntity> userDetails = userDetailRepository
+		        .findAllUsersByKeyword(searchText);
 		return convert(userDetails);
 	}
 

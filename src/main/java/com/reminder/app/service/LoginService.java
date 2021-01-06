@@ -45,7 +45,9 @@ public class LoginService implements UserDetailsService {
 			        AuthorityUtils.createAuthorityList(user.getRole().name()));
 
 		}
-		throw new UsernameNotFoundException("User not found.");
+		
+		throw new DomainException(ResponseCodeType.LOGIN_FAILED,
+		        ViewMessage.INVALID_CREDENTIALS);
 
 	}
 

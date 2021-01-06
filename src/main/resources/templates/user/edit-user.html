@@ -6,8 +6,8 @@
 	<div sec:authorize="isAuthenticated()">
 		<div class="container-fluid text-center"
 			sec:authorize="hasAuthority('ADMIN')">
-			<h1>Add User</h1>
-			<form th:action="@{/main/add-user}" th:object="${user}" method="post"
+			<h1>Update User</h1>
+			<form th:action="@{/main/edit-user}" th:object="${user}" method="post"
 				style="max-width: 350px; margin: 0 auto;">
 				<div class="border border-secondary p-3 rounded">
 					<div th:replace="layouts/fragments :: error-message" />
@@ -44,7 +44,7 @@
 							th:required="required">
 					</p>
 					<input class="form-control btn btn-primary button" type="submit"
-						value="Add">
+						value="Update">
 				</div>
 			</form>
 		</div>
