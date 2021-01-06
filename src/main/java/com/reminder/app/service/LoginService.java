@@ -37,18 +37,14 @@ public class LoginService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 	        throws UsernameNotFoundException {
 		log.info("getting user by username: {}", username);
-		User user = userService.getUserByUserName(username);
-
-		if (user != null) {
+		try {
+			User user = userService.getUserByUserName(username);
 			return new org.springframework.security.core.userdetails.User(
 			        user.getUsername(), user.getPassword(), true, true, true, true,
 			        AuthorityUtils.createAuthorityList(user.getRole().name()));
-
+		} catch (DomainException e) {
+			throw new UsernameNotFoundException(ViewMessage.INVALID_CREDENTIALS);
 		}
-		
-		throw new DomainException(ResponseCodeType.LOGIN_FAILED,
-		        ViewMessage.INVALID_CREDENTIALS);
-
 	}
 
 }

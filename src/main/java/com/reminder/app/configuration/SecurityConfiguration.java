@@ -22,6 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService loginService;
 
+	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(loginService);
 	}
@@ -30,15 +31,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(final HttpSecurity http) throws Exception {
 		http
 		        .authorizeRequests()
-		        .antMatchers("/*").permitAll()
-		        .antMatchers("/favicon.ico").permitAll()
 		        .antMatchers("/add-user").access(RoleType.ADMIN.getName())
+		        .antMatchers("/favicon.ico").permitAll()
+		        .antMatchers("/*").permitAll()
 		        .anyRequest().authenticated()
 		        .and()
 		        .formLogin()
 		        .loginPage("/login")
 		        .defaultSuccessUrl("/main")
-		        .failureUrl("/login")
+		        .failureUrl("/login-error")
 		        .and()
 		        .logout()
 		        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

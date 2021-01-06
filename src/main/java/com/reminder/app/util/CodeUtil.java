@@ -26,6 +26,14 @@ public class CodeUtil {
 	public static <T> boolean hasElemets(List<T> value) {
 		return isNotNull(value) && not(value.isEmpty());
 	}
+	
+	public static <T> boolean hasValue(String value) {
+		return isNotNull(value) && not(isEmpty(value));
+	}
+	
+	public static <T> boolean isEmpty(String value) {
+		return "".equalsIgnoreCase(value);
+	}
 
 	public static <T> boolean areEqual(String value1, String value2) {
 		if (isNull(value1) && isNotNull(value2)) {

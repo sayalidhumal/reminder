@@ -45,7 +45,7 @@ public class UserController {
 		} catch (Exception e) {
 			log.info("Exception occured while getting all users: {}", e.getMessage(), e);
 		}
-		model.addAttribute("users", users);
+		model.addAttribute(ViewConstants.USERS, users);
 		return ViewMapping.VIEW_USERS;
 	}
 
@@ -65,7 +65,7 @@ public class UserController {
 			log.info("Exception occured while getting all users: {}", e.getMessage(), e);
 		}
 
-		model.addAttribute(ViewConstants.USER_DETAILS, users);
+		model.addAttribute(ViewConstants.USERS, users);
 		return ViewMapping.VIEW_USERS;
 	}
 

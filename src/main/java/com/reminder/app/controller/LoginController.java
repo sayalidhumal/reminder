@@ -1,6 +1,11 @@
 package com.reminder.app.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +31,40 @@ public class LoginController {
 	@Autowired
 	LoginService loginService;
 
+	@GetMapping(path = "/")
+	public String main() {
+		return ViewMapping.REDIRECT_TO_LOGIN;
+	}
+
+	@GetMapping(path = "/login")
+	public String showloginForm() {
+		return ViewMapping.LOGIN;
+	}
+
+	@PostMapping(path = "/login")
+	public String processLogin(@ModelAttribute(value = "username") String userName,
+	        @ModelAttribute(value = "password") String password, Model model) {
+
+		log.info("authenticating user: {}", userName);
+		loginService.processLogin(userName, password);
+		return ViewMapping.MAIN_USER;
+	}
+
+	@GetMapping("/login-error")
+	public String login(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession(false);
+		String errorMessage = null;
+		if (session != null) {
+			AuthenticationException ex = (AuthenticationException) session
+			        .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
+			if (ex != null) {
+				errorMessage = ex.getMessage();
+			}
+		}
+		model.addAttribute(ViewConstants.ERROR_MESSAGE, errorMessage);
+		return ViewMapping.LOGIN;
+	}
+
 	@GetMapping(path = "/signup")
 	public String showSignUpForm(Model model) {
 		model.addAttribute(ViewConstants.USER_DETAILS, User.builder().build());
@@ -37,34 +76,11 @@ public class LoginController {
 		try {
 			userService.addUser(user);
 			return ViewMapping.REDIRECT_TO_LOGIN;
-			
+
 		} catch (DomainException e) {
 			model.addAttribute(ViewConstants.ERROR_MESSAGE, e.getViewMessage());
 			return ViewMapping.SIGN_UP;
 		}
 	}
 
-	@GetMapping(path = "/login")
-	public String showloginForm() {
-		return ViewMapping.LOGIN;
-	}
-
-	@PostMapping(path = "/login")
-	public String processLogin(@ModelAttribute(value = "username") String userName,
-	        @ModelAttribute(value = "password") String password, Model model) {
-		try {
-			log.info("authenticating user: {}", userName);
-			loginService.processLogin(userName, password);
-			return ViewMapping.MAIN_USER;
-		} catch (DomainException e) {
-			model.addAttribute(ViewConstants.ERROR_MESSAGE, e.getViewMessage());
-			return ViewMapping.LOGIN;
-		}
-
-	}
-
-	@GetMapping(path = "/")
-	public String main() {
-		return ViewMapping.REDIRECT_TO_LOGIN;
-	}
 }

@@ -1,6 +1,7 @@
 package com.reminder.app.service;
 
 import static com.reminder.app.util.CodeUtil.hasElemets;
+import static com.reminder.app.util.CodeUtil.hasValue;
 
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,10 @@ public class UserService implements UserServiceInterface {
 
 	@Override
 	public List<User> getAllUsersByKeyword(String searchText) {
-		return userDaoService.getAllUsersByKeyword(searchText);
+		if (hasValue(searchText)) {
+			return userDaoService.getAllUsersByKeyword(searchText);
+		}
+		return getAllUsers();
 	}
 
 	@Override
